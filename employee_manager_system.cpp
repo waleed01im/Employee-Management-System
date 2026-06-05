@@ -11,9 +11,7 @@ string toLower(string s)
     return s;
 }
 
-// ============================================================
-//  BASE CLASS  (already existed)
-// ============================================================
+//  BASE CLASS 
 class Base
 {
 public:
