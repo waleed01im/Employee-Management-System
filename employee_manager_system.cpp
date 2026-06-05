@@ -15,16 +15,12 @@ string toLower(string s)
 class Base
 {
 public:
-    virtual void display() = 0;
-    virtual void inputData() = 0;
+    virtual void display() = 0; // Pure virtual
+    virtual void inputData() = 0; 
     virtual ~Base() {}
 };
 
-// ============================================================
 //  BASE CLASS 2: EmployeeRecord
-//  AttendanceRecord, PayrollRecord, LeaveRecord all share
-//  employeeID / employeeName and file I/O -> put them here
-// ============================================================
 class EmployeeRecord
 {
 protected:
@@ -50,10 +46,8 @@ public:
     virtual void loadFromFile(EmployeeRecord *records[], int &count) = 0;
     virtual ~EmployeeRecord() {}
 };
-// ============================================================
+
 //  BASE CLASS 3: Manager
-//  Every *Manager class has showMenu() -> put it here
-// ============================================================
 class Manager
 {
 public:
@@ -61,9 +55,7 @@ public:
     virtual ~Manager() {}
 };
 
-// ============================================================
-//  CLASS: department  (inherits Base - same as before)
-// ============================================================
+//  Derived Class : department from Base
 class department : public Base
 {
 private:
@@ -160,9 +152,7 @@ public:
     }
 };
 
-// ============================================================
-//  CLASS: employee  (inherits Base - same as before)
-// ============================================================
+//  Derived CLASS: employee from Base
 class employee : public Base
 {
 private:
@@ -379,9 +369,7 @@ public:
     }
 };
 
-// ============================================================
-//  Global arrays & counters  (same as before)
-// ============================================================
+//  Global arrays objects & counters
 employee emp[100];
 department dept[100];
 int deptCount = 0;
@@ -390,10 +378,7 @@ int attCount = 0;
 int payCount = 0;
 int leaveCount = 0;
 
-// ============================================================
-//  CLASS: AttendanceRecord
-//  NOW inherits EmployeeRecord  <-- INHERITANCE ADDED
-// ============================================================
+//  Derived CLASS: AttendanceRecord from EmployeeRecord
 class AttendanceRecord : public EmployeeRecord
 {
 public:
@@ -451,10 +436,7 @@ public:
     }
 };
 
-// ============================================================
-//  CLASS: PayrollRecord
-//  NOW inherits EmployeeRecord  <-- INHERITANCE ADDED
-// ============================================================
+//  Derived CLASS: PayrollRecord from EmployeeRecord
 class PayrollRecord : public EmployeeRecord
 {
 public:
@@ -521,10 +503,7 @@ public:
     }
 };
 
-// ============================================================
-//  CLASS: LeaveRecord
-//  NOW inherits EmployeeRecord  <-- INHERITANCE ADDED
-// ============================================================
+//  Derived CLASS: LeaveRecord from EmployeeRecord
 class LeaveRecord : public EmployeeRecord
 {
 public:
@@ -581,12 +560,12 @@ public:
     }
 };
 
-//  Global record arrays
+//  Global record arrays objects
 AttendanceRecord att[100];
 PayrollRecord pay[100];
 LeaveRecord leave[100];
 
-//  CLASS: EmployeeManager
+//  Derived CLASS: EmployeeManager from Manager
 class EmployeeManager : public Manager
 {
 public:
