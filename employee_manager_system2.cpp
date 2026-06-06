@@ -2,6 +2,7 @@
 #include <iomanip>
 #include <fstream>
 #include <string>
+#include "colors.h"
 using namespace std;
 
 string toLower(string s)
@@ -82,28 +83,28 @@ public:
 
     void inputData() override
     {
-        cout << "Enter Department ID: ";
+        cout << PROMPT_C "Enter Department ID: " RESET;
         cin >> DepartmentId;
         cin.ignore();
-        cout << "Enter Department Name: ";
+        cout << PROMPT_C "Enter Department Name: " RESET;
         getline(cin, DepartmentName);
         DepartmentName = toLower(DepartmentName);
-        cout << "Enter Number of Employees: ";
+        cout << PROMPT_C "Enter Number of Employees: " RESET;
         cin >> num_employees;
         cin.ignore();
-        cout << "Enter Name of the Head of Department: ";
+        cout << PROMPT_C "Enter Name of the Head of Department: " RESET;
         getline(cin, head_of_department);
         head_of_department = toLower(head_of_department);
-        cout << "\nDepartment Added Successfully!" << endl;
+        cout << SUCCESS "\nDepartment Added Successfully!\n" RESET;
     }
 
     void display() override
     {
         cout << left
-             << setw(5) << DepartmentId
-             << setw(28) << DepartmentName
+             << setw(5)  << DepartmentId
+             << CYAN     << setw(28) << DepartmentName << RESET
              << setw(20) << num_employees
-             << setw(25) << head_of_department
+             << setw(25) << head_of_department 
              << endl;
     }
 
@@ -221,32 +222,32 @@ public:
 
     void inputData() override
     {
-        cout << "Enter Employee ID: ";
+        cout << PROMPT_C "Enter Employee ID: " RESET;
         cin >> employeeID;
         cin.ignore();
-        cout << "Enter Name: ";
+        cout << PROMPT_C "Enter Name: " RESET;
         getline(cin, name);
         name = toLower(name);
-        cout << "Enter Age: ";
+        cout << PROMPT_C "Enter Age: " RESET;
         cin >> age;
         cin.ignore();
-        cout << "Enter Gender: ";
+        cout << PROMPT_C "Enter Gender: " RESET;
         getline(cin, gender);
-        cout << "Enter Phone Number: ";
+        cout << PROMPT_C "Enter Phone Number: " RESET;
         getline(cin, phoneNumber);
-        cout << "Enter Qualifications: ";
+        cout << PROMPT_C "Enter Qualifications: " RESET;
         getline(cin, qualifications);
-        cout << "Enter Designation: ";
+        cout << PROMPT_C "Enter Designation: " RESET;
         getline(cin, designation);
-        cout << "Enter Department: ";
+        cout << PROMPT_C "Enter Department: " RESET;
         getline(cin, Employeedepartment);
         Employeedepartment = toLower(Employeedepartment);
-        cout << "Enter Experience (years): ";
+        cout << PROMPT_C "Enter Experience (years): " RESET;
         cin >> experience;
         cin.ignore();
-        cout << "Enter Salary: ";
+        cout << PROMPT_C "Enter Salary: " RESET;
         getline(cin, salary);
-        cout << "Enter Joining Year: ";
+        cout << PROMPT_C "Enter Joining Year: " RESET;
         getline(cin, joiningYear);
 
         netCalculatedSalary = stoi(salary);
@@ -257,20 +258,20 @@ public:
         leaveApplied = false;
         leaveStatus = "No Request";
 
-        cout << "\nEmployee Added Successfully!" << endl;
+        cout << SUCCESS "\nEmployee Added Successfully!\n" RESET;
     }
 
     void display() override
     {
         cout << left
-             << setw(5) << employeeID
-             << setw(15) << name
-             << setw(5) << age
+             << setw(5)  << employeeID
+             << CYAN     << setw(15) << name    << RESET
+             << setw(5)  << age
              << setw(10) << gender
              << setw(12) << phoneNumber
              << setw(25) << Employeedepartment
-             << setw(25) << designation
-             << setw(10) << salary
+             << setw(25) << designation        
+             << setw(10) << salary             
              << setw(10) << joiningYear
              << endl;
     }
@@ -322,7 +323,7 @@ public:
         ofstream outFile("employees.txt");
         if (!outFile)
         {
-            cout << "Error opening file for writing!\n";
+            cout << ERROR_C << "Error opening file for writing!\n" << RESET;
             return;
         }
         for (int i = 0; i < count; i++)
@@ -400,7 +401,7 @@ public:
         ofstream File("attendance.txt");
         if (!File)
         {
-            cout << "Error opening attendance.txt for writing!\n";
+            cout << ERROR_C << "Error opening attendance.txt for writing!\n" << RESET;
             return;
         }
         for (int i = 0; i < count; i++)
@@ -418,7 +419,7 @@ public:
         ifstream File("attendance.txt");
         if (!File)
         {
-            cout << "No existing attendance data found.\n";
+            cout << ERROR_C << "No existing attendance data found.\n" << RESET;
             return;
         }
         count = 0;
@@ -462,7 +463,7 @@ public:
         ofstream File("payroll.txt");
         if (!File)
         {
-            cout << "Error opening payroll.txt for writing!\n";
+            cout << ERROR_C << "Error opening payroll.txt for writing!\n" << RESET;
             return;
         }
         for (int i = 0; i < count; i++)
@@ -482,7 +483,7 @@ public:
         ifstream File("payroll.txt");
         if (!File)
         {
-            cout << "No existing payroll data found.\n";
+            cout << ERROR_C << "No existing payroll data found.\n" << RESET;
             return;
         }
         count = 0;
@@ -525,7 +526,7 @@ public:
         ofstream File("leave.txt");
         if (!File)
         {
-            cout << "Error opening leave.txt for writing!\n";
+            cout << ERROR_C << "Error opening leave.txt for writing!\n" << RESET;
             return;
         }
         for (int i = 0; i < count; i++)
@@ -543,7 +544,7 @@ public:
         ifstream File("leave.txt");
         if (!File)
         {
-            cout << "No existing leave data found.\n";
+            cout << ERROR_C << "No existing leave data found.\n" << RESET;
             return;
         }
         count = 0;
@@ -571,14 +572,13 @@ class EmployeeManager : public Manager
 public:
     void printheader()
     {
-        cout << "===========================================================================================================\n";
-        cout << "                                         Employee Details:\n";
-        cout << "===========================================================================================================\n";
-        cout << left << setw(5) << "ID" << setw(15) << "Name" << setw(5) << "Age"
+        cout << HEADER_C "===========================================================================================================\n"
+             << BOLD     "                                         Employee Details:\n" RESET
+             << HEADER_C "===========================================================================================================\n" RESET
+             << GREEN    << left << setw(5) << "ID" << setw(15) << "Name" << setw(5) << "Age"
              << setw(10) << "Gender" << setw(12) << "Phone" << setw(25) << "Department"
              << setw(25) << "Designation" << setw(10) << "Salary" << setw(10) << "Year"
-             << endl
-             << endl;
+             << RESET << endl << endl;
     }
 
     void addEmployee()
@@ -605,7 +605,7 @@ public:
     void updateEmployee()
     {
         int id;
-        cout << "Enter Employee ID to Update: ";
+        cout << PROMPT_C << "Enter Employee ID to Update: " << RESET;
         cin >> id;
         cin.ignore();
         bool found = false;
@@ -614,16 +614,16 @@ public:
             if (emp[i].get_employee_id() == id)
             {
                 found = true;
-                cout << "\nCurrent Employee Details:\n";
+                cout << MENU_C << "\nCurrent Employee Details:\n" << RESET;
                 emp[i].display();
                 int choice;
                 do
                 {
-                    cout << "\nWhat do you want to update?\n";
+                    cout << PROMPT_C << "\nWhat do you want to update?\n" << RESET;
                     cout << "1. Name\n2. Age\n3. Gender\n4. Phone Number\n";
                     cout << "5. Qualifications\n6. Designation\n7. Department\n";
                     cout << "8. Experience\n9. Salary\n10. Done\n";
-                    cout << "Enter your choice: ";
+                    cout << PROMPT_C << "Enter your choice: " << RESET;
                     cin >> choice;
                     cin.ignore();
                     string tmp;
@@ -631,72 +631,72 @@ public:
                     switch (choice)
                     {
                     case 1:
-                        cout << "New Name: ";
+                    cout << PROMPT_C << "New Name: " << RESET;
                         getline(cin, tmp);
                         emp[i].setName(tmp);
-                        cout << "Updated.\n";
+                        cout << SUCCESS << "Updated.\n" << RESET;
                         break;
                     case 2:
-                        cout << "New Age: ";
+                        cout << PROMPT_C << "New Age: " << RESET;
                         cin >> itmp;
                         cin.ignore();
                         emp[i].setAge(itmp);
-                        cout << "Updated.\n";
+                        cout << SUCCESS << "Updated.\n" << RESET;
                         break;
                     case 3:
-                        cout << "New Gender: ";
+                        cout << PROMPT_C << "New Gender: " << RESET;
                         getline(cin, tmp);
                         emp[i].setGender(tmp);
-                        cout << "Updated.\n";
+                        cout << SUCCESS << "Updated.\n" << RESET;
                         break;
                     case 4:
-                        cout << "New Phone: ";
+                        cout << PROMPT_C << "New Phone: " << RESET;
                         getline(cin, tmp);
                         emp[i].setPhone(tmp);
-                        cout << "Updated.\n";
+                        cout << SUCCESS << "Updated.\n" << RESET;
                         break;
                     case 5:
-                        cout << "New Qualifications: ";
+                        cout << PROMPT_C << "New Qualifications: " << RESET;
                         getline(cin, tmp);
                         emp[i].setQualifications(tmp);
-                        cout << "Updated.\n";
+                        cout << SUCCESS << "Updated.\n" << RESET;
                         break;
                     case 6:
-                        cout << "New Designation: ";
+                        cout << PROMPT_C << "New Designation: " << RESET;
                         getline(cin, tmp);
                         emp[i].setDesignation(tmp);
-                        cout << "Updated.\n";
+                        cout << SUCCESS << "Updated.\n" << RESET;
                         break;
                     case 7:
-                        cout << "New Department: ";
+                        cout << PROMPT_C << "New Department: " << RESET;
                         getline(cin, tmp);
                         emp[i].setDepartment(tmp);
-                        cout << "Updated.\n";
+                        cout << SUCCESS << "Updated.\n" << RESET;
                         break;
                     case 8:
-                        cout << "New Experience: ";
+                        cout << PROMPT_C << "New Experience: " << RESET;
                         cin >> itmp;
                         cin.ignore();
                         emp[i].setExperience(itmp);
-                        cout << "Updated.\n";
+                        cout << SUCCESS << "Updated.\n" << RESET;
                         break;
                     case 9:
-                        cout << "New Salary: ";
+                        cout << PROMPT_C << "New Salary: " << RESET;
                         getline(cin, tmp);
                         emp[i].setSalary(tmp);
-                        cout << "Updated.\n";
+                        cout << SUCCESS << "Updated.\n" << RESET;
                         break;
                     case 10:
                         break;
                     default:
-                        cout << "Invalid choice.\n";
+                        cout << ERROR_C << "Invalid choice.\n" << RESET;
                         break;
                     }
                 } while (choice != 10);
             }
         }
         if (!found)
-            cout << "Employee not found.\n";
+            cout << ERROR_C << "Employee not found.\n" << RESET;
         emp[0].saveToFile(emp, empCount);
         system("pause");
     }
@@ -704,8 +704,9 @@ public:
     void searchEmployee()
     {
         int id;
-        cout << "Enter Employee ID to Search: ";
+        cout << PROMPT_C << "Enter Employee ID to Search: " << RESET;
         cin >> id;
+        cin.ignore(); // Clear the newline character from the buffer
         bool found = false;
         for (int i = 0; i < empCount; i++)
         {
@@ -718,15 +719,16 @@ public:
             }
         }
         if (!found)
-            cout << "Employee not found.\n";
+            cout << ERROR_C << "Employee not found.\n" << RESET;
         system("pause");
     }
 
     void deleteEmployee()
     {
         int id;
-        cout << "Enter Employee ID to Delete: ";
+        cout << PROMPT_C << "Enter Employee ID to Delete: " << RESET;
         cin >> id;
+        cin.ignore(); // Clear the newline character from the buffer
         bool found = false;
         for (int i = 0; i < empCount; i++)
         {
@@ -738,12 +740,12 @@ public:
                 for (int j = i; j < empCount - 1; j++)
                     emp[j] = emp[j + 1];
                 empCount--;
-                cout << "\nEmployee Deleted Successfully!\n";
+                cout << SUCCESS << "\nEmployee Deleted Successfully!\n" << RESET;
                 break;
             }
         }
         if (!found)
-            cout << "Employee not found.\n";
+            cout << ERROR_C << "Employee not found.\n" << RESET;
         emp[0].saveToFile(emp, empCount);
         system("pause");
     }
@@ -754,38 +756,24 @@ public:
         int choice;
         do
         {
-            cout << "\n===================================" << endl;
-            cout << "        Employee Management" << endl;
-            cout << "===================================" << endl;
-            cout << "1. Add Employee" << endl;
-            cout << "2. View All Employees" << endl;
-            cout << "3. Update Employee" << endl;
-            cout << "4. Search Employee" << endl;
-            cout << "5. Delete Employee" << endl;
-            cout << "6. Back to Main Menu" << endl;
-            cout << "\nEnter Your Choice: ";
+            cout << MENU_C "\n================ Employee Management ================" RESET << endl;
+            cout << "1. Add Employee"        << endl;
+            cout << "2. View All Employees"  << endl;
+            cout << "3. Update Employee"     << endl;
+            cout << "4. Search Employee"     << endl;
+            cout << "5. Delete Employee"     << endl;
+            cout << "6. Back to Main Menu"   << endl;
+            cout << PROMPT_C "\nEnter Your Choice: " RESET;
             cin >> choice;
             switch (choice)
             {
-            case 1:
-                addEmployee();
-                break;
-            case 2:
-                viewAllEmployees();
-                break;
-            case 3:
-                updateEmployee();
-                break;
-            case 4:
-                searchEmployee();
-                break;
-            case 5:
-                deleteEmployee();
-                break;
-            case 6:
-                return;
-            default:
-                cout << "Invalid choice.\n";
+            case 1: addEmployee();    break;
+            case 2: viewAllEmployees(); break;
+            case 3: updateEmployee(); break;
+            case 4: searchEmployee(); break;
+            case 5: deleteEmployee(); break;
+            case 6: return;
+            default: cout << RED "Invalid choice.\n" RESET;
             }
         } while (choice != 6);
     }
@@ -810,11 +798,12 @@ public:
             cout << "No departments available.\n";
             return;
         }
-        cout << "======================================================================\n";
-        cout << "                        Departments List:\n";
-        cout << "======================================================================\n";
-        cout << left << setw(5) << "ID" << setw(28) << "Department Name"
-             << setw(20) << "Employees" << setw(25) << "Head of Department" << endl;
+        cout << HEADER_C "======================================================================\n" RESET;
+        cout << BOLD << "                        Departments List:\n" << RESET;
+        cout << HEADER_C "======================================================================\n" RESET;
+        cout << RESET << left 
+             << GREEN << setw(5) << "ID" << setw(28) << "Department Name" << RESET
+             << GREEN << setw(20) << "Employees" << setw(25) << "Head of Department" << RESET << endl;
         for (int i = 0; i < deptCount; i++)
             dept[i].display();
         cout << endl;
@@ -824,7 +813,7 @@ public:
     void updateDepartment()
     {
         string deptname;
-        cout << "Enter Department Name to Update: ";
+        cout << PROMPT_C << "Enter Department Name to Update: " << RESET;
         cin.ignore();
         getline(cin, deptname);
         deptname = toLower(deptname);
@@ -834,12 +823,12 @@ public:
             if (dept[i].get_department_name() == deptname)
             {
                 found = true;
-                cout << "\nCurrent Details:\n";
+                cout << GREEN << "\nCurrent Details:\n" << RESET;
                 dept[i].display();
                 cin.ignore();
                 string tmp;
                 int itmp;
-                cout << "\nWhat do you want to update?\n";
+                cout << PROMPT_C << "\nWhat do you want to update?\n" << RESET;
                 cout << "1. Department Name\n2. Number of Employees\n3. Head of Department\n4. Done\n";
                 int choice;
                 cin >> choice;
@@ -847,33 +836,33 @@ public:
                 switch (choice)
                 {
                 case 1:
-                    cout << "New Department Name: ";
+                    cout << PROMPT_C << "New Department Name: " << RESET;
                     getline(cin, tmp);
                     dept[i].setName(toLower(tmp));
-                    cout << "Updated.\n";
+                    cout << SUCCESS << "Updated.\n" << RESET;
                     break;
                 case 2:
-                    cout << "New Number of Employees: ";
+                    cout << PROMPT_C << "New Number of Employees: " << RESET;
                     cin >> itmp;
                     cin.ignore();
                     dept[i].setNumEmployees(itmp);
-                    cout << "Updated.\n";
+                    cout << SUCCESS << "Updated.\n" << RESET;
                     break;
                 case 3:
-                    cout << "New Head of Department: ";
+                    cout << PROMPT_C << "New Head of Department: " << RESET;
                     getline(cin, tmp);
                     dept[i].setHOD(toLower(tmp));
-                    cout << "Updated.\n";
+                    cout << SUCCESS << "Updated.\n" << RESET;
                     break;
                 case 4:
                     break;
                 default:
-                    cout << "Invalid choice.\n";
+                    cout << ERROR_C << "Invalid choice.\n" << RESET;
                 }
             }
         }
         if (!found)
-            cout << "Department not found.\n";
+            cout << ERROR_C << "Department not found.\n" << RESET;
         dept[0].saveToFile(dept, deptCount);
         system("pause");
     }
@@ -881,7 +870,7 @@ public:
     void deleteDepartment()
     {
         string deptName;
-        cout << "Enter Department Name to Delete: ";
+        cout << PROMPT_C << "Enter Department Name to Delete: " << RESET;
         cin.ignore();
         getline(cin, deptName);
         deptName = toLower(deptName);
@@ -891,17 +880,17 @@ public:
             if (dept[i].get_department_name() == deptName)
             {
                 found = true;
-                cout << "\nCurrent Department Details:\n";
+                cout << GREEN << "\nCurrent Department Details:\n" << RESET;
                 dept[i].display();
                 for (int j = i; j < deptCount - 1; j++)
                     dept[j] = dept[j + 1];
                 deptCount--;
-                cout << "\nDepartment Deleted Successfully!\n";
+                cout << SUCCESS << "\nDepartment Deleted Successfully!\n" << RESET;
                 break;
             }
         }
         if (!found)
-            cout << "Department not found.\n";
+            cout << ERROR_C << "Department not found.\n" << RESET;
         dept[0].saveToFile(dept, deptCount);
         system("pause");
     }
@@ -909,7 +898,7 @@ public:
     void searchDepartment()
     {
         string deptName;
-        cout << "Enter Department Name to Search: ";
+        cout << PROMPT_C << "Enter Department Name to Search: " << RESET;
         cin.ignore();
         getline(cin, deptName);
         deptName = toLower(deptName);
@@ -919,13 +908,13 @@ public:
             if (dept[i].get_department_name() == deptName)
             {
                 found = true;
-                cout << "\nDepartment Details:\n";
+                cout << GREEN << "\nDepartment Details:\n" << RESET;
                 dept[i].display();
                 break;
             }
         }
         if (!found)
-            cout << "Department not found.\n";
+            cout << ERROR_C << "Department not found.\n" << RESET;
         system("pause");
     }
 
@@ -934,38 +923,24 @@ public:
         int choice;
         do
         {
-            cout << "\n========================================" << endl;
-            cout << "         Department Management" << endl;
-            cout << "========================================" << endl;
-            cout << "1. Add Department" << endl;
-            cout << "2. View All Departments" << endl;
-            cout << "3. Update Department" << endl;
-            cout << "4. Delete Department" << endl;
-            cout << "5. Search Department" << endl;
-            cout << "6. Back to Main Menu" << endl;
-            cout << "\nEnter Your Choice: ";
+            cout << MENU_C "\n================ Department Management ================" RESET << endl;
+            cout << "1. Add Department"      << endl;
+            cout << "2. View All Departments"<< endl;
+            cout << "3. Update Department"   << endl;
+            cout << "4. Delete Department"   << endl;
+            cout << "5. Search Department"   << endl;
+            cout << "6. Back to Main Menu"   << endl;
+            cout << PROMPT_C "\nEnter Your Choice: " RESET;
             cin >> choice;
             switch (choice)
             {
-            case 1:
-                addDepartment();
-                break;
-            case 2:
-                viewAllDepartments();
-                break;
-            case 3:
-                updateDepartment();
-                break;
-            case 4:
-                deleteDepartment();
-                break;
-            case 5:
-                searchDepartment();
-                break;
-            case 6:
-                return;
-            default:
-                cout << "Invalid choice.\n";
+            case 1: addDepartment();    break;
+            case 2: viewAllDepartments(); break;
+            case 3: updateDepartment(); break;
+            case 4: deleteDepartment(); break;
+            case 5: searchDepartment(); break;
+            case 6: return;
+            default: cout << ERROR_C << "Invalid choice.\n" << RESET;
             }
         } while (choice != 6);
     }
@@ -993,7 +968,7 @@ public:
     void markAttendance()
     {
         int id;
-        cout << "Enter Employee ID to Mark Attendance: ";
+        cout << PROMPT_C << "Enter Employee ID to Mark Attendance: " << RESET;
         cin >> id;
         bool found = false;
         for (int i = 0; i < empCount; i++)
@@ -1002,20 +977,20 @@ public:
             {
                 found = true;
                 int status;
-                cout << "1. Present\n2. Absent\nSelect Status: ";
+                cout << PROMPT_C << "1. Present\n2. Absent\nSelect Status: " << RESET;
                 cin >> status;
                 if (status == 1)
                 {
                     emp[i].set_present_count(emp[i].get_present_count() + 1);
-                    cout << "Marked Present successfully.\n";
+                    cout << SUCCESS << "Marked Present successfully.\n" << RESET;
                 }
                 else if (status == 2)
                 {
                     emp[i].set_absent_count(emp[i].get_absent_count() + 1);
-                    cout << "Marked Absent successfully.\n";
+                    cout << SUCCESS << "Marked Absent successfully.\n" << RESET;
                 }
                 else
-                    cout << "Invalid choice.\n";
+                    cout << ERROR_C << "Invalid choice.\n" << RESET;
                 emp[0].saveToFile(emp, empCount);
                 syncRecords();
                 att[0].saveToFile(att, attCount);
@@ -1023,14 +998,14 @@ public:
             }
         }
         if (!found)
-            cout << "Employee ID not found.\n";
+            cout << ERROR_C << "Employee ID not found.\n" << RESET;
         system("pause");
     }
 
     void viewAttendance()
     {
         int id;
-        cout << "Enter Employee ID to View Attendance: ";
+        cout << PROMPT_C << "Enter Employee ID to View Attendance: " << RESET;
         cin >> id;
         bool found = false;
         for (int i = 0; i < empCount; i++)
@@ -1038,23 +1013,23 @@ public:
             if (emp[i].get_employee_id() == id)
             {
                 found = true;
-                cout << "\nEmployee: " << emp[i].get_employee_name()
+                cout << GREEN <<"\nEmployee: " << RESET << emp[i].get_employee_name()
                      << " | Present: " << emp[i].get_present_count()
                      << " | Absent: " << emp[i].get_absent_count() << "\n";
                 break;
             }
         }
         if (!found)
-            cout << "Employee ID not found.\n";
+            cout << ERROR_C << "Employee ID not found.\n" << RESET;
         system("pause");
     }
 
     void monthlyReport()
     {
-        cout << "========================================================\n";
-        cout << left << setw(10) << "ID" << setw(20) << "Name"
-             << setw(12) << "Present" << setw(12) << "Absent" << endl;
-        cout << "========================================================\n";
+        cout << HEADER_C << "========================================================\n" << RESET;
+        cout << BOLD << left << setw(10) << "ID" << setw(20) << "Name"
+             << setw(12) << "Present" << setw(12) << "Absent" << endl  << RESET;
+        cout << HEADER_C << "========================================================\n" << RESET;
         for (int i = 0; i < empCount; i++)
         {
             cout << left << setw(10) << emp[i].get_employee_id()
@@ -1067,10 +1042,10 @@ public:
 
     void absentEmployees()
     {
-        cout << "\nHighly Absent Employees (Absents > 3):\n";
-        cout << "========================================================\n";
-        cout << left << setw(10) << "ID" << setw(20) << "Name" << setw(12) << "Absents" << endl;
-        cout << "========================================================\n";
+        cout << GREEN << "\nHighly Absent Employees (Absents > 3):\n" << RESET;
+        cout << HEADER_C << "========================================================\n" << RESET;
+        cout << BOLD << left << setw(10) << "ID" << setw(20) << "Name" << setw(12) << "Absents" << endl << RESET;
+        cout << HEADER_C << "========================================================\n" << RESET;
         bool found = false;
         for (int i = 0; i < empCount; i++)
         {
@@ -1083,7 +1058,7 @@ public:
             }
         }
         if (!found)
-            cout << "No employees with high absence rates.\n";
+            cout << ERROR_C << "No employees with high absence rates.\n" << RESET;
         system("pause");
     }
 
@@ -1093,32 +1068,22 @@ public:
         int choice;
         do
         {
-            cout << "\n================ Attendance Management ================" << endl;
-            cout << "1. Mark Attendance" << endl;
-            cout << "2. View Attendance" << endl;
-            cout << "3. Attendance Report" << endl;
-            cout << "4. View Highly Absent Employees" << endl;
-            cout << "5. Back" << endl;
-            cout << "\nEnter Your Choice: ";
+            cout << MENU_C "\n================ Attendance Management ================" RESET << endl;
+            cout << "1. Mark Attendance"             << endl;
+            cout << "2. View Attendance"             << endl;
+            cout << "3. Attendance Report"           << endl;
+            cout << "4. View Highly Absent Employees"<< endl;
+            cout << "5. Back"                        << endl;
+            cout << PROMPT_C "\nEnter Your Choice: " RESET;
             cin >> choice;
             switch (choice)
             {
-            case 1:
-                markAttendance();
-                break;
-            case 2:
-                viewAttendance();
-                break;
-            case 3:
-                monthlyReport();
-                break;
-            case 4:
-                absentEmployees();
-                break;
-            case 5:
-                return;
-            default:
-                cout << "Invalid selection.\n";
+            case 1: markAttendance(); break;
+            case 2: viewAttendance(); break;
+            case 3: monthlyReport();  break;
+            case 4: absentEmployees();break;
+            case 5: return;
+            default: cout << ERROR_C << "Invalid selection.\n" << RESET;
             }
         } while (choice != 5);
     }
@@ -1148,7 +1113,7 @@ public:
     void generateSalary()
     {
         int id;
-        cout << "Enter Employee ID to generate salary: ";
+        cout << PROMPT_C << "Enter Employee ID to generate salary: " << RESET;
         cin >> id;
         bool found = false;
         for (int i = 0; i < empCount; i++)
@@ -1158,7 +1123,7 @@ public:
                 found = true;
                 double net = stoi(emp[i].get_employee_salary()) + emp[i].get_bonus() - emp[i].get_tax();
                 emp[i].set_net_salary(net);
-                cout << "Net salary updated for " << emp[i].get_employee_name()
+                cout << SUCCESS << "Net salary updated for " << emp[i].get_employee_name()
                      << " ($" << net << ")\n";
                 emp[0].saveToFile(emp, empCount);
                 syncRecords();
@@ -1167,14 +1132,14 @@ public:
             }
         }
         if (!found)
-            cout << "Employee not found.\n";
+            cout << ERROR_C << "Employee not found.\n" << RESET;
         system("pause");
     }
 
     void viewSalarySlip()
     {
         int id;
-        cout << "Enter Employee ID: ";
+        cout << PROMPT_C << "Enter Employee ID: " << RESET;
         cin >> id;
         bool found = false;
         for (int i = 0; i < empCount; i++)
@@ -1182,19 +1147,19 @@ public:
             if (emp[i].get_employee_id() == id)
             {
                 found = true;
-                cout << "\n--- SALARY SLIP ---\n";
+                cout << TABLE_C << "\n--- SALARY SLIP ---\n" << RESET;
                 cout << "ID: " << emp[i].get_employee_id() << "\n";
                 cout << "Name: " << emp[i].get_employee_name() << "\n";
                 cout << "Base Salary:   $" << emp[i].get_employee_salary() << "\n";
                 cout << "Bonus:        +$" << emp[i].get_bonus() << "\n";
                 cout << "Tax:          -$" << emp[i].get_tax() << "\n";
-                cout << "-------------------\n";
+                cout << YELLOW << "-------------------\n" << RESET;
                 cout << "Net Payable:   $" << emp[i].get_net_salary() << "\n";
                 break;
             }
         }
         if (!found)
-            cout << "Employee not found.\n";
+            cout << ERROR_C << "Employee not found.\n" << RESET;
         system("pause");
     }
 
@@ -1202,9 +1167,9 @@ public:
     {
         int id;
         double bonus;
-        cout << "Enter Employee ID: ";
+        cout << PROMPT_C << "Enter Employee ID: " << RESET;
         cin >> id;
-        cout << "Enter Bonus Amount: ";
+        cout << PROMPT_C << "Enter Bonus Amount: " << RESET;
         cin >> bonus;
         for (int i = 0; i < empCount; i++)
         {
@@ -1213,7 +1178,7 @@ public:
                 emp[i].set_bonus(bonus);
                 double base = stoi(emp[i].get_employee_salary());
                 emp[i].set_net_salary(base + emp[i].get_bonus() - emp[i].get_tax());
-                cout << "Bonus allocated successfully.\n";
+                cout << SUCCESS << "Bonus allocated successfully.\n" << RESET;
                 emp[0].saveToFile(emp, empCount);
                 syncRecords();
                 pay[0].saveToFile(pay, payCount);
@@ -1227,9 +1192,9 @@ public:
     {
         int id;
         double tax;
-        cout << "Enter Employee ID: ";
+        cout << PROMPT_C << "Enter Employee ID: " << RESET;
         cin >> id;
-        cout << "Enter Tax Amount: ";
+        cout << PROMPT_C << "Enter Tax Amount: " << RESET;
         cin >> tax;
         for (int i = 0; i < empCount; i++)
         {
@@ -1238,7 +1203,7 @@ public:
                 emp[i].set_tax(tax);
                 double base = stoi(emp[i].get_employee_salary());
                 emp[i].set_net_salary(base + emp[i].get_bonus() - emp[i].get_tax());
-                cout << "Tax deducted successfully.\n";
+                cout << SUCCESS << "Tax deducted successfully.\n" << RESET;
                 emp[0].saveToFile(emp, empCount);
                 syncRecords();
                 pay[0].saveToFile(pay, payCount);
@@ -1250,10 +1215,10 @@ public:
 
     void payrollReport()
     {
-        cout << "========================================================================\n";
-        cout << left << setw(8) << "ID" << setw(15) << "Name" << setw(12) << "Base"
-             << setw(10) << "Bonus" << setw(10) << "Tax" << setw(12) << "Net Salary" << endl;
-        cout << "========================================================================\n";
+        cout << HEADER_C << "========================================================================\n" << RESET;
+        cout << BOLD << left << setw(8) << "ID" << setw(15) << "Name" << setw(12) << "Base"
+             << setw(10) << "Bonus" << setw(10) << "Tax" << setw(12) << "Net Salary" << endl << RESET;
+        cout << HEADER_C << "========================================================================\n" << RESET;
         for (int i = 0; i < empCount; i++)
         {
             cout << left << setw(8) << emp[i].get_employee_id()
@@ -1271,36 +1236,24 @@ public:
         int choice;
         do
         {
-            cout << "\n================ Payroll Management ================" << endl;
+            cout << MENU_C "\n================ Payroll Management ================" RESET << endl;
             cout << "1. Generate Salary" << endl;
             cout << "2. View Salary Slip" << endl;
-            cout << "3. Add Bonus" << endl;
-            cout << "4. Deduct Tax" << endl;
-            cout << "5. Payroll Report" << endl;
-            cout << "6. Back" << endl;
-            cout << "\nEnter Your Choice: ";
+            cout << "3. Add Bonus"        << endl;
+            cout << "4. Deduct Tax"       << endl;
+            cout << "5. Payroll Report"   << endl;
+            cout << "6. Back"             << endl;
+            cout << PROMPT_C "\nEnter Your Choice: " RESET;
             cin >> choice;
             switch (choice)
             {
-            case 1:
-                generateSalary();
-                break;
-            case 2:
-                viewSalarySlip();
-                break;
-            case 3:
-                addBonus();
-                break;
-            case 4:
-                deductTax();
-                break;
-            case 5:
-                payrollReport();
-                break;
-            case 6:
-                return;
-            default:
-                cout << "Invalid choice.\n";
+            case 1: generateSalary(); break;
+            case 2: viewSalarySlip(); break;
+            case 3: addBonus();       break;
+            case 4: deductTax();      break;
+            case 5: payrollReport();  break;
+            case 6: return;
+            default: cout << RED "Invalid choice.\n" RESET;
             }
         } while (choice != 6);
     }
@@ -1328,14 +1281,14 @@ public:
     void applyLeave()
     {
         int id;
-        cout << "Enter your Employee ID: ";
+        cout << PROMPT_C << "Enter your Employee ID: " << RESET;
         cin >> id;
         for (int i = 0; i < empCount; i++)
         {
             if (emp[i].get_employee_id() == id)
             {
                 emp[i].set_leave_request(true, "Pending Approval");
-                cout << "Leave request submitted.\n";
+                cout << SUCCESS << "Leave request submitted.\n" << RESET;
                 emp[0].saveToFile(emp, empCount);
                 syncRecords();
                 leave[0].saveToFile(leave, leaveCount);
@@ -1348,13 +1301,13 @@ public:
     void viewLeaveStatus()
     {
         int id;
-        cout << "Enter Employee ID: ";
+        cout << PROMPT_C << "Enter Employee ID: " << RESET;
         cin >> id;
         for (int i = 0; i < empCount; i++)
         {
             if (emp[i].get_employee_id() == id)
             {
-                cout << "Leave Status: " << emp[i].get_leave_status() << "\n";
+                cout << GREEN << "Leave Status: " << RESET << emp[i].get_leave_status() << "\n";
                 break;
             }
         }
@@ -1363,7 +1316,7 @@ public:
 
     void manageLeave()
     {
-        cout << "\nPending Leave Requests:\n";
+        cout << TABLE_C << "\nPending Leave Requests:\n" << RESET;
         for (int i = 0; i < empCount; i++)
         {
             if (emp[i].has_applied_leave())
@@ -1372,20 +1325,20 @@ public:
                      << " | Status: " << emp[i].get_leave_status() << "\n";
         }
         int targetId;
-        cout << "\nEnter Employee ID to act upon: ";
+        cout << PROMPT_C << "\nEnter Employee ID to act upon: " << RESET;
         cin >> targetId;
         for (int i = 0; i < empCount; i++)
         {
             if (emp[i].get_employee_id() == targetId)
             {
                 int decision;
-                cout << "1. Approve\n2. Reject\nChoice: ";
+                cout << PROMPT_C << "1. Approve\n2. Reject\nChoice: " << RESET;
                 cin >> decision;
                 if (decision == 1)
                     emp[i].set_leave_request(true, "Approved");
                 else if (decision == 2)
                     emp[i].set_leave_request(false, "Rejected");
-                cout << "Decision recorded.\n";
+                cout << SUCCESS << "Decision recorded.\n" << RESET;
                 emp[0].saveToFile(emp, empCount);
                 syncRecords();
                 leave[0].saveToFile(leave, leaveCount);
@@ -1401,28 +1354,20 @@ public:
         int choice;
         do
         {
-            cout << "\n================ Leave Management ================" << endl;
-            cout << "1. Apply Leave" << endl;
-            cout << "2. View Leave Status" << endl;
-            cout << "3. Manage Leave (Approve/Reject)" << endl;
-            cout << "4. Back" << endl;
-            cout << "\nEnter Your Choice: ";
+            cout << MENU_C "\n================ Leave Management ================" RESET << endl;
+            cout << "1. Apply Leave"                    << endl;
+            cout << "2. View Leave Status"              << endl;
+            cout << "3. Manage Leave (Approve/Reject)"  << endl;
+            cout << "4. Back"                           << endl;
+            cout << PROMPT_C "\nEnter Your Choice: " RESET;
             cin >> choice;
             switch (choice)
             {
-            case 1:
-                applyLeave();
-                break;
-            case 2:
-                viewLeaveStatus();
-                break;
-            case 3:
-                manageLeave();
-                break;
-            case 4:
-                return;
-            default:
-                cout << "Unknown selection.\n";
+            case 1: applyLeave();    break;
+            case 2: viewLeaveStatus(); break;
+            case 3: manageLeave();   break;
+            case 4: return;
+            default: cout << ERROR_C "Unknown selection.\n" << RESET;
             }
         } while (choice != 4);
     }
@@ -1434,21 +1379,20 @@ class ReportManager : public Manager
 private:
     void printheader()
     {
-        cout << "========================================================================================================\n";
-        cout << "                                         Employee Details:\n";
-        cout << "========================================================================================================\n";
-        cout << left << setw(5) << "ID" << setw(15) << "Name" << setw(5) << "Age"
+        cout << HEADER_C "========================================================================================================\n"
+             << BOLD     "                                         Employee Details:\n" RESET
+             << HEADER_C "========================================================================================================\n" RESET
+             << GREEN << left << setw(5) << "ID" << setw(15) << "Name" << setw(5) << "Age"
              << setw(10) << "Gender" << setw(15) << "Phone" << setw(28) << "Department"
              << setw(15) << "Designation" << setw(10) << "Salary" << setw(10) << "Year"
-             << endl
-             << endl;
+             << RESET << endl << endl;
     }
 
 public:
     void searchByID()
     {
         int id;
-        cout << "\nEnter Employee ID: ";
+        cout << PROMPT_C "\nEnter Employee ID: " RESET;
         cin >> id;
         bool found = false;
         for (int i = 0; i < empCount; i++)
@@ -1461,7 +1405,7 @@ public:
             }
         }
         if (!found)
-            cout << "\nEmployee not found.\n";
+            cout << RED "\nEmployee not found.\n" RESET;
         system("pause");
     }
 
@@ -1470,7 +1414,7 @@ public:
         string name;
         bool found = false;
         cin.ignore();
-        cout << "\nEnter Employee Name: ";
+        cout << PROMPT_C "\nEnter Employee Name: " RESET;
         getline(cin, name);
         name = toLower(name);
         for (int i = 0; i < empCount; i++)
@@ -1483,7 +1427,7 @@ public:
             }
         }
         if (!found)
-            cout << "\nEmployee not found.\n";
+            cout << RED "\nEmployee not found.\n" RESET;
         system("pause");
     }
 
@@ -1492,25 +1436,24 @@ public:
         string deptName;
         bool found = false;
         cin.ignore();
-        cout << "\nEnter Department Name: ";
+        cout << PROMPT_C "\nEnter Department Name: " RESET;
         getline(cin, deptName);
         deptName = toLower(deptName);
-        cout << "\nEmployees in " << deptName << " Department:\n";
+        cout <<"\nEmployees in " << CYAN << deptName << " "<< RESET << "Department:\n" ;
         for (int i = 0; i < empCount; i++)
         {
             if (emp[i].get_employee_department() == deptName)
             {
-                cout << left << setw(5) << "ID" << setw(15) << "Name" << setw(5) << "Age"
-             << setw(10) << "Gender" << setw(12) << "Phone" << setw(25) << "Department"
-             << setw(25) << "Designation" << setw(10) << "Salary" << setw(10) << "Year"
-             << endl
-             << endl;
+                cout << GREEN << left << setw(5) << "ID" << setw(15) << "Name" << setw(5) << "Age"
+                     << setw(10) << "Gender" << setw(12) << "Phone" << setw(25) << "Department"
+                     << setw(25) << "Designation" << setw(10) << "Salary" << setw(10) << "Year"
+                     << RESET << endl << endl;
                 emp[i].view_employee();
                 found = true;
             }
         }
         if (!found)
-            cout << "\nNo employees found in this department.\n";
+            cout << RED "\nNo employees found in this department.\n" RESET;
         system("pause");
     }
 
@@ -1518,7 +1461,7 @@ public:
     {
         if (empCount == 0)
         {
-            cout << "\nNo employees available.\n";
+            cout << RED "\nNo employees available.\n" RESET;
             return;
         }
         int maxIdx = 0;
@@ -1527,14 +1470,18 @@ public:
             if (stoi(emp[i].get_employee_salary()) > stoi(emp[maxIdx].get_employee_salary()))
                 maxIdx = i;
         }
-        cout << "\nHighest Paid Employee:\n";
+        cout << YELLOW "\nHighest Paid Employee:\n" RESET;
+            cout << GREEN << left << setw(5) << "ID" << setw(15) << "Name" << setw(5) << "Age"
+                     << setw(10) << "Gender" << setw(12) << "Phone" << setw(25) << "Department"
+                     << setw(25) << "Designation" << setw(10) << "Salary" << setw(10) << "Year"
+                     << RESET << endl << endl;
         emp[maxIdx].view_employee();
         system("pause");
     }
 
     void totalEmployees()
     {
-        cout << "\nTotal Employees: " << empCount << endl;
+        cout <<"\nTotal Employees: "  << CYAN  << empCount  << RESET << endl;
         system("pause");
     }
 
@@ -1544,36 +1491,24 @@ public:
         int choice;
         do
         {
-            cout << "\n================ Reports & Search ================" << endl;
-            cout << "1. Search Employee by ID" << endl;
+            cout << MENU_C "\n================ Reports & Search ================" RESET << endl;
+            cout << "1. Search Employee by ID"   << endl;
             cout << "2. Search Employee by Name" << endl;
-            cout << "3. Department Report" << endl;
-            cout << "4. Highest Paid Employee" << endl;
-            cout << "5. Total Employees" << endl;
-            cout << "6. Back" << endl;
-            cout << "\nEnter Your Choice: ";
+            cout << "3. Department Report"        << endl;
+            cout << "4. Highest Paid Employee"    << endl;
+            cout << "5. Total Employees"          << endl;
+            cout << "6. Back"                     << endl;
+            cout << PROMPT_C "\nEnter Your Choice: " RESET;
             cin >> choice;
             switch (choice)
             {
-            case 1:
-                searchByID();
-                break;
-            case 2:
-                searchByName();
-                break;
-            case 3:
-                departmentReport();
-                break;
-            case 4:
-                highestPaidEmployee();
-                break;
-            case 5:
-                totalEmployees();
-                break;
-            case 6:
-                return;
-            default:
-                cout << "\nInvalid Choice.\n";
+            case 1: searchByID();          break;
+            case 2: searchByName();        break;
+            case 3: departmentReport();    break;
+            case 4: highestPaidEmployee(); break;
+            case 5: totalEmployees();      break;
+            case 6: return;
+            default: cout << ERROR_C "\nInvalid Choice.\n" RESET;
             }
         } while (choice != 6);
     }
@@ -1601,27 +1536,27 @@ public:
         int choice;
         do
         {
-            cout << "\n================ Admin Login ================" << endl;
+            cout << MENU_C "\n================ Admin Login ================" RESET << endl;
             cout << "1. Login" << endl;
-            cout << "2. Exit" << endl;
-            cout << "Enter Your Choice: ";
+            cout << "2. Exit"  << endl;
+            cout << PROMPT_C "Enter Your Choice: " RESET;
             cin >> choice;
 
             if (choice == 1)
             {
-                cout << "Enter Username: ";
+                cout << PROMPT_C "Enter Username: " RESET;
                 cin >> username;
-                cout << "Enter Password: ";
+                cout << PROMPT_C "Enter Password: " RESET;
                 cin >> password;
 
                 if (username != adminUsername)
-                    cout << "\nInvalid Username.\n";
+                    cout << ERROR_C "\nInvalid Username.\n" RESET;
                 else if (password != adminPassword)
-                    cout << "\nInvalid Password.\n";
+                    cout << ERROR_C "\nInvalid Password.\n" RESET;
                 else
                 {
                     isLoggedIn = true;
-                    cout << "\nLogin Successful!\n";
+                    cout << SUCCESS "\nLogin Successful!\n" RESET;
                     system("pause");
                     return true;
                 }
@@ -1672,43 +1607,31 @@ private:
         int choice;
         do
         {
-            cout << "\n=======================================" << endl;
-            cout << "      Employee Management System" << endl;
-            cout << "=======================================" << endl;
-            cout << "1. Employee Management" << endl;
+            cout << MENU_C "\n=======================================" RESET << endl;
+            cout << MENU_C << BOLD   "      Employee Management System"       RESET << endl;
+            cout << MENU_C "=======================================" RESET << endl;
+            cout << "1. Employee Management"   << endl;
             cout << "2. Department Management" << endl;
             cout << "3. Attendance Management" << endl;
-            cout << "4. Payroll Management" << endl;
-            cout << "5. Leave Management" << endl;
-            cout << "6. Reports & Search" << endl;
-            cout << "7. Exit" << endl;
-            cout << "\nPlease select an option: ";
+            cout << "4. Payroll Management"    << endl;
+            cout << "5. Leave Management"      << endl;
+            cout << "6. Reports & Search"      << endl;
+            cout << "7. Exit"                  << endl;
+            cout << PROMPT_C "\nPlease select an option: " RESET;
             cin >> choice;
             switch (choice)
             {
-            case 1:
-                empMgr.showMenu();
-                break;
-            case 2:
-                deptMgr.showMenu();
-                break;
-            case 3:
-                attnMgr.showMenu();
-                break;
-            case 4:
-                payMgr.showMenu();
-                break;
-            case 5:
-                leaveMgr.showMenu();
-                break;
-            case 6:
-                reportMgr.showMenu();
-                break;
+            case 1: empMgr.showMenu();    break;
+            case 2: deptMgr.showMenu();   break;
+            case 3: attnMgr.showMenu();   break;
+            case 4: payMgr.showMenu();    break;
+            case 5: leaveMgr.showMenu();  break;
+            case 6: reportMgr.showMenu(); break;
             case 7:
-                cout << "Exiting!\n";
+                cout << YELLOW "Exiting!\n" RESET;
                 exit(0);
             default:
-                cout << "Invalid choice.\n";
+                cout << RED "Invalid choice.\n" RESET;
             }
         } while (choice != 7);
     }
@@ -1716,6 +1639,7 @@ private:
 
 int main()
 {
+    enableColors();
     MenuSystem system;
     system.run();
     return 0;

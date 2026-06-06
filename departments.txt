@@ -1,1 +1,2 @@
 1,artificial intelligence,50,Abdul Rehman
+1,ai,50,umar
